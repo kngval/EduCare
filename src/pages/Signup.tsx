@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import school1 from "../assets/school1.svg";
+import { useState } from "react";
 
 function Signup() {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+
+  const handleSubmit = async() => {
+      const response = await fetch()
+  }
   return (
     <div className="bg-[#ededed] flex w-full h-screen items-center justify-center">
       <div className=" bg-white p-12 rounded-sm w-[1000px]">
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-2xl text-customBlue font-bold">EduCare</h1>
-         {/* <div>
-            <button className="bg-customBlue text-white text-sm font-semibold px-12 py-2 rounded-md">
-              SignUp
-            </button>
-          </div>
-          */}
         </div>
 
         <div className="grid grid-cols-6 gap-10">
@@ -22,7 +23,7 @@ function Signup() {
               Enter your account details
             </div>
 
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <div className="grid gap-5">
                 <div>
                   <label className="text-customBlack font-bold " htmlFor="">
