@@ -5,11 +5,10 @@ import { useState } from "react";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [successMsg, setSuccessMsg] = useState();
+  const [response, setResponse] = useState({success:null,message:null,field:null});
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (email != "" && password != "") {
       try {
         const res = await fetch("http://localhost:5287/api/auth/signup", {
           headers: {
@@ -19,12 +18,15 @@ function Signup() {
           body: JSON.stringify({ email: email, password: password, role: "student" })
         })
         const data = await res.json();
-        setSuccessMsg(data.message);
+        setResponse({
+          success : data.success,
+          message : data.message,
+          field : data.field
+        })
         console.log(data);
       } catch (err) {
         console.error(err);
       }
-    }
   }
 
   return (
@@ -55,6 +57,12 @@ function Signup() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
+                {response && response.success === false && response.field == "email" &&(
+                  <div className="text-sm text-red-500 flex items-center mt-2 gap-1"><svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"  fill="#EF4444"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
+                    <h4>{response.message}</h4>
+
+                  </div>
+                )}
                 </div>
                 <div>
                   <label className="text-customBlack font-bold" htmlFor="">
@@ -67,13 +75,13 @@ function Signup() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                </div>
-                {successMsg && (
-                  <div className="text-sm text-red-500 flex items-center justify-center gap-1"><svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"  fill="#EF4444"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
-                    <h4>{successMsg}</h4>
+                {response && response.success === false && response.field == "password" &&(
+                  <div className="text-sm text-red-500 flex items-center mt-2 gap-1"><svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg"  fill="#EF4444"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
+                    <h4>{response.message}</h4>
 
                   </div>
                 )}
+                </div>
                 <div>
                   <button className="bg-customBlue w-full text-white text-lg font-semibold rounded-md py-2">
                     Signup
