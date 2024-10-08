@@ -6,6 +6,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState({success:null,message:null,field:null});
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -18,6 +19,7 @@ function Signup() {
           body: JSON.stringify({ email: email, password: password, role: "student" })
         })
         const data = await res.json();
+
         setResponse({
           success : data.success,
           message : data.message,
