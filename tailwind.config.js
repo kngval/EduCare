@@ -4,11 +4,16 @@ export default {
   theme: {
     extend: {
       textColor: {
-        customBlack: "#333437",
-        customBlue: "#152259",
+        customBlack: "#8C89B4",
+        customBlue: "#141332",
+        customBlue2: "#1D1D41",
+        customLightBlue:"#6359E9"
       },
       backgroundColor: {
-        customBlue: "#152259",
+        customBlue: "#141332",
+        customBlue2: "#1D1D41",
+        customLightBlue:"#6359E9",
+        customPlaceholder: "#27264E"
       },
     },
   },
