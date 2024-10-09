@@ -15,6 +15,12 @@ export default {
         customLightBlue:"#6359E9",
         customPlaceholder: "#27264E"
       },
+      borderColor : {
+        customBlue: "#141332",
+        customBlue2: "#1D1D41",
+        customLightBlue:"#6359E9",
+        customPlaceholder: "#27264E"
+      }
     },
   },
   plugins: [],
