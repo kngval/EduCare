@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import dashboardsvg from "../../assets/Navbar/dashboard.svg";
-import sectionsvg from "../../assets/Navbar/sections.svg";
-import gradesvg from "../../assets/Navbar/grades.svg";
-import accountsvg from "../../assets/Navbar/account.svg";
-import settingsvg from "../../assets/Navbar/settings.svg";
-import logoutsvg from "../../assets/Navbar/logout.svg";
-import logo from "../../assets/logo.svg";
+import { RootState } from "../redux/store";
+import dashboardsvg from "../assets/Navbar/dashboard.svg";
+import sectionsvg from "../assets/Navbar/sections.svg";
+import gradesvg from "../assets/Navbar/grades.svg";
+import accountsvg from "../assets/Navbar/account.svg";
+import settingsvg from "../assets/Navbar/settings.svg";
+import logoutsvg from "../assets/Navbar/logout.svg";
+import logo from "../assets/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/authSlice";
+import { logout } from "../redux/authSlice";
 
 function Navbar() {
   const token = useSelector((state: RootState) => state.authReducer.token);

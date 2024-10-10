@@ -11,6 +11,7 @@ function Signup() {
     e.preventDefault();
 
     try {
+
       const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/signup`, {
         headers: {
           "Content-type": "application/json"
