@@ -8,43 +8,71 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [teacherCode, setTeacherCode] = useState("");
-  const [adminCode, setAdminCode] = useState("");
+  const [code, setCode] = useState("");
   const [response, setResponse] = useState({ success: null, message: null, field: null });
 
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (role == "admin" || role == "teacher") {
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/login`, {
-        headers: {
-          "Content-type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({ email: email, password: password })
-      })
-      const data = await res.json();
+      try {
 
-      if (data) {
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/login/admin`, {
+          headers: {
+            "Content-type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ email: email, password: password, role: role, code: code })
+        })
+        const data = await res.json();
+
 
         setResponse({
           success: data.success,
           message: data.message,
           field: data.field
         })
-        console.log(response)
-        if (data.token != null) {
 
-          dispatch(setToken(data.token));
+        dispatch(setToken(data.token))
+
+        if (data.success == true) {
+          setEmail("")
+          setPassword("")
+          setCode("");
         }
-
         console.log(data);
+      } catch (err) {
+        console.error(err);
       }
+    } else {
+      try {
 
-    } catch (err) {
-      console.error(err);
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/login`, {
+          headers: {
+            "Content-type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ email: email, password: password, role: "student" })
+        })
+        const data = await res.json();
+
+        setResponse({
+          success: data.success,
+          message: data.message,
+          field: data.field
+        })
+
+        dispatch(setToken(data.token))
+        if (data.success == true) {
+          setEmail("")
+          setPassword("")
+        }
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
@@ -134,42 +162,24 @@ function Login() {
 
 
                 </div>
-                {role == "teacher" && (
+                {role == "teacher" || role == "admin" ? (
                   <div>
                     <label className="text-customBlack font-bold text-sm" htmlFor="">
-                      Teacher Code
+                      {role.charAt(0).toUpperCase() + role.slice(1)} Code
                     </label>
                     <input
                       type="text"
                       placeholder="Enter your code"
                       className="block p-2 text-white text-sm bg-customPlaceholder rounded-sm outline-none w-full"
-                      value={teacherCode}
-                      onChange={(e) => setTeacherCode(e.target.value)}
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
                     />
 
-                    <ErrorMessage fieldName="teacherCode" />
+                    <ErrorMessage fieldName="code" />
 
                   </div>
 
-                )}
-                {role == "admin" && (
-                  <div>
-                    <label className="text-customBlack font-bold text-sm" htmlFor="">
-                      Admin Code
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter your code"
-                      className="block p-2 text-white text-sm bg-customPlaceholder rounded-sm outline-none w-full"
-                      value={adminCode}
-                      onChange={(e) => setAdminCode(e.target.value)}
-                    />
-
-                    <ErrorMessage fieldName="teacherCode" />
-
-                  </div>
-
-                )}
+                ) : null}
 
                 <div>
                   <button type="submit" className="bg-customLightBlue w-full text-white text-lg font-semibold rounded-md py-2">

@@ -6,34 +6,65 @@ import { useState } from "react";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [code, setCode] = useState("");
   const [response, setResponse] = useState({ success: null, message: null, field: null });
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("role : ", role);
+    if (role == "admin" || role == "teacher") {
 
-    try {
+      try {
 
-      const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/signup`, {
-        headers: {
-          "Content-type": "application/json"
-        },
-        method: "POST",
-        body: JSON.stringify({ email: email, password: password, role: "student" })
-      })
-      const data = await res.json();
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/signup/admin`, {
+          headers: {
+            "Content-type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ email: email, password: password, role: role, code: code })
+        })
+        const data = await res.json();
+        setResponse({
+          success: data.success,
+          message: data.message,
+          field: data.field
+        })
 
-      setResponse({
-        success: data.success,
-        message: data.message,
-        field: data.field
-      })
-
-      if (data.success == true) {
-        setEmail("")
-        setPassword("")
+        if (data.success == true) {
+          setEmail("")
+          setPassword("")
+          setCode("");
+        }
+        console.log(data);
+      } catch (err) {
+        console.error(err);
       }
-      console.log(data);
-    } catch (err) {
-      console.error(err);
+    } else {
+      try {
+
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/signup`, {
+          headers: {
+            "Content-type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({ email: email, password: password, role: "student" })
+        })
+        const data = await res.json();
+
+        setResponse({
+          success: data.success,
+          message: data.message,
+          field: data.field
+        })
+
+        if (data.success == true) {
+          setEmail("")
+          setPassword("")
+        }
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
   const ErrorMessage = ({ fieldName }: { fieldName: string }) => {
@@ -98,6 +129,38 @@ function Signup() {
 
 
                 </div>
+                <div>
+                  <label className="text-customBlack block font-bold text-sm" htmlFor="">
+                    Role
+                  </label>
+                  <select value={role} onChange={(e) => setRole(e.target.value)} className="bg-customPlaceholder text-sm p-2 w-full">
+                    <option value="" className="">Select a role : </option>
+                    <option value="admin" className="">Admin</option>
+                    <option value="student" className="">Student</option>
+                    <option value="teacher" className="">Teacher</option>
+                  </select>
+                  <ErrorMessage fieldName="role" />
+
+
+                </div>
+                {role == "teacher" || role == "admin" ? (
+                  <div>
+                    <label className="text-customBlack font-bold text-sm" htmlFor="">
+                      {role.charAt(0).toUpperCase() + role.slice(1)} Code
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Enter your code"
+                      className="block p-2 text-white text-sm bg-customPlaceholder rounded-sm outline-none w-full"
+                      value={code}
+                      onChange={(e) => setCode(e.target.value)}
+                    />
+
+                    <ErrorMessage fieldName="code" />
+
+                  </div>
+
+                ) : null}
 
 
                 {response.success === true && (
