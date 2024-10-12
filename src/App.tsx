@@ -22,11 +22,11 @@ function App() {
           <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/dashboard" />} />
 
           {/* Main Routes */}
-          <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login"/>}/>
+          <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/login" />} />
 
-          <Route path="/sections" element={token ? <Sections /> : <Navigate to="/login" />}/>
-          <Route path="/grades" element={token ? <Grades /> : <Navigate to="/login" />}/>
-          <Route path="/account" element={token ? <Account /> : <Navigate to="/login" />}/>
+          <Route path="/sections" element={token ? <Sections /> : <Navigate to="/login" />} />
+          <Route path="/grades" element={token ? <Grades /> : <Navigate to="/login" />} />
+          <Route path="/account" element={token ? <Account /> : <Navigate to="/login" />} />
         </Routes>
 
       </BrowserRouter>
