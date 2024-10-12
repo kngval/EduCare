@@ -2,22 +2,25 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
 * {
   font-family: "Poppins";
 }
-#root {
-  display: flex;
-}
 body {
   /*default background and text color for the whole app*/
-  background-color:#141332;
+  background-color: #141332;
   color: #ffffff;
 }
-
-@media(min-width:500px)
-{
+@media(min-width:500px) {
   .authContainer {
     width: 400px;
     padding: 3rem;
+  }
+}
+
+@media(min-width:1024px) {
+
+  #root {
+    display: flex;
   }
 }
