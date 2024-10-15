@@ -96,7 +96,7 @@ function Login() {
     <div className="bg-customBlue flex w-full lg:mt-[5rem] lg:mb-[10rem] justify-center">
       <div className="authContainer bg-customBlue2  p-12 my-10 rounded-sm w-full  sm:w-[500px] lg:w-[800px] xl:w-[1000px]">
         <div className="flex gap-3 items-center mb-10">
-          <img src={logo} className="w-[50px]" />
+          <img src={logo} className="w-[30px]" />
           <h1 className="text-2xl text-white font-bold">EduCare</h1>
         </div>
 
