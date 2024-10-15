@@ -35,7 +35,13 @@ function Navbar() {
             EduCare
           </Link>
           <div onClick={() => setToggle(!toggle)} className={` w-8 cursor-pointer`}>
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 7L4 7" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 12L4 12" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 17L4 17" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+            {!toggle ? (
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 7L4 7" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 12L4 12" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> <path d="M20 17L4 17" stroke="#6359E9" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+            ) : (
+              <svg onClick={() => setToggle(!toggle)} className="w-6 py-1 lg:hidden" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#6359E9"></path></g></svg>
+
+            )}        
           </div>
 
         </div>
@@ -43,7 +49,7 @@ function Navbar() {
 
       <div className={`absolute z-50 min-h-screen top-0 -left-full lg:static ${toggle ? "left-0" : "-left-full"} transition-all ease-in-out duration-500 w-[250px] sm:w-[300px]  pb-24  bg-customBlue2 `}>
         <div className={`w-full flex justify-end  py-4 pr-5 cursor-pointer lg:cursor-auto`}>
-         <svg onClick={() => setToggle(!toggle)} className="w-5 lg:hidden" viewBox="0 0 1024 1024"  version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#6359E9"></path></g></svg> 
+          <svg onClick={() => setToggle(!toggle)} className="w-5 lg:hidden" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#6359E9"></path></g></svg>
         </div>
         <div className="text-2xl  font-bold px-[2.5rem]">
           <Link to="/" className="flex mb-12 items-center gap-3">
