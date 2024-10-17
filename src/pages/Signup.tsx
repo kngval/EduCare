@@ -84,8 +84,8 @@ function Signup() {
     ) : null;
   };
   return (
-    <div className="bg-customBlue flex min-h-screen w-full  justify-center items-center">
-      <div className="authContainer bg-customBlue2 p-12 rounded-sm w-full sm:w-[500px] lg:w-[800px] xl:w-[1000px]">
+    <div className="bg-customBlue flex lg:min-h-screen w-full mt-[5rem] lg:mt-0 justify-center lg:items-center">
+      <div className="authContainer bg-customBlue2 p-12 mb-24 lg:mb-0 rounded-sm w-full sm:w-[500px] lg:w-[800px] xl:w-[1000px]">
         <div className="flex gap-3 items-center mb-10">
           <img src={logo} className="w-[30px]" />
           <h1 className="text-2xl text-white font-bold">EduCare</h1>
