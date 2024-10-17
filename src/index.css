@@ -12,6 +12,9 @@ body {
   background-color: #141332;
   color: #ffffff;
 }
+#root{
+  position: relative;
+}
 
 @media(min-width:500px) {
   .authContainer {
