@@ -7,7 +7,8 @@ export default {
         customBlack: "#8C89B4",
         customBlue: "#141332",
         customBlue2: "#1D1D41",
-        customLightBlue:"#6359E9"
+        customLightBlue:"#6359E9",
+        customPlaceholder: "#27264E"
       },
       backgroundColor: {
         customBlue: "#141332",
