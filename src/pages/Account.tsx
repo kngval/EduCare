@@ -32,9 +32,9 @@ function Account() {
     firstName: "Jane",
     lastName: "Doe",
     role: "Student",
-    email: "",
-    phone: "",
-    gender: "",
+    email: "JaneDoe@mail.com",
+    phone: "123-456-7890",
+    gender: "nigga",
     birthdate: "",
   })
   const [addressInfo, setAddressInfo] = useState({
@@ -76,7 +76,7 @@ function Account() {
               </div>
 
               <div className="text-center sm:text-start">
-                <h1 className="font-semibold text-lg">{personalInfo.firstName + " " + personalInfo.lastName}</h1>
+                <h1 className="font-semibold text-lg">{personalInfo.firstName.length + personalInfo.lastName.length > 30 ? personalInfo.firstName.slice(0,15) + "..." + " " + personalInfo.lastName.slice(0,15) + "..." :  personalInfo.firstName + " " + personalInfo.lastName}</h1>
                 <h3 className="text-gray-400 text-sm">Las Vegas, Nevada, USA</h3>
                 <h3 className="text-gray-500 text-sm">{personalInfo.role ? personalInfo.role[0].toUpperCase() + personalInfo.role.slice(1,personalInfo.role.length): ""}</h3>
               </div>
@@ -141,7 +141,7 @@ function Account() {
                       <option>Other</option>
                     </select>
                   ) : (
-                    <h1 className="font-semibold text-sm">{personalInfo.phone}</h1>
+                    <h1 className="font-semibold text-sm">{personalInfo.gender}</h1>
                   )}
                 </div>
                 <div className="grid gap-1 text-xs">
@@ -164,7 +164,7 @@ function Account() {
             </div>
 
             {/*ADDRESS TAB*/}
-            <div className="md:grow border-2 border-customBlue2 grid gap-2 p-8 md:gap-5 ">
+            <div className="md:grow border-2  border-customBlue2 grid gap-2 p-8 md:gap-5 ">
               <div className="pb-4 flex justify-between items-center font-semibold">
                 <h1>Address Information</h1>
 
