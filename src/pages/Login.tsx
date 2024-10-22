@@ -54,7 +54,7 @@ function Login() {
             "Content-type": "application/json"
           },
           method: "POST",
-          body: JSON.stringify({ email: email, password: password, role: "student" })
+          body: JSON.stringify({ email: email, password: password, role: role })
         })
         const data = await res.json();
 
