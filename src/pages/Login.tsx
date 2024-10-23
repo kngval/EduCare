@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/authSlice";
 import logo from "../assets/logo.svg"
+import ErrorMessage from "../components/ErrorMessage";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -76,22 +77,6 @@ function Login() {
     }
   }
 
-  const ErrorMessage = ({ fieldName }: { fieldName: string }) => {
-    return response && response.success === false && response.field === fieldName ? (
-      <div className="text-sm text-red-500 flex items-center mt-2 gap-1">
-        <svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#EF4444">
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)">
-              <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" />
-            </g>
-          </g>
-        </svg>
-        <h4>{response.message}</h4>
-      </div>
-    ) : null;
-  };
   return (
     <div className="bg-customBlue flex w-full lg:min-h-screen mt-[5rem] lg:mt-0 lg:items-center justify-center">
       <div className="authContainer bg-customBlue2 mb-24 lg:mb-0 p-12 rounded-sm w-full  sm:w-[500px] lg:w-[800px] xl:w-[1000px]">
@@ -120,13 +105,8 @@ function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  <ErrorMessage fieldName="email" response={response}/>
 
-                  {response && response.success === false && response.field == "email" && (
-                    <div className="text-sm text-red-500 flex items-center mt-2 gap-1"><svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#EF4444"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
-                      <h4>{response.message}</h4>
-
-                    </div>
-                  )}
                 </div>
                 <div>
                   <label className="text-customBlack font-bold text-sm" htmlFor="">
@@ -139,12 +119,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {response && response.success === false && response.field == "password" && (
-                    <div className="text-sm text-red-500 flex items-center mt-2 gap-1"><svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#EF4444"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>error-filled</title> <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd"> <g id="add" fill="#EF4444" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C331.136,3.55271368e-14 426.666667,95.5306667 426.666667,213.333333 C426.666667,331.136 331.136,426.666667 213.333333,426.666667 C95.5306667,426.666667 3.55271368e-14,331.136 3.55271368e-14,213.333333 C3.55271368e-14,95.5306667 95.5306667,3.55271368e-14 213.333333,3.55271368e-14 Z M262.250667,134.250667 L213.333333,183.168 L164.416,134.250667 L134.250667,164.416 L183.168,213.333333 L134.250667,262.250667 L164.416,292.416 L213.333333,243.498667 L262.250667,292.416 L292.416,262.250667 L243.498667,213.333333 L292.416,164.416 L262.250667,134.250667 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
-                      <h4>{response.message}</h4>
-
-                    </div>
-                  )}
+                 <ErrorMessage fieldName="password" response={response}/> 
 
                 </div>
 
@@ -158,7 +133,7 @@ function Login() {
                     <option value="student" className="">Student</option>
                     <option value="teacher" className="">Teacher</option>
                   </select>
-                  <ErrorMessage fieldName="role" />
+                  <ErrorMessage fieldName="role" response={response}/>
 
 
                 </div>
@@ -175,7 +150,7 @@ function Login() {
                       onChange={(e) => setCode(e.target.value)}
                     />
 
-                    <ErrorMessage fieldName="code" />
+                    <ErrorMessage fieldName="code" response={response}/>
 
                   </div>
 
