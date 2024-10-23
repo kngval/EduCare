@@ -2,6 +2,8 @@ import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
+import ErrorMessage from "../components/ErrorMessage";
+import { SuccessResponse } from "../types/Response.types";
 
 interface CustomJwtPayload extends JwtPayload {
   //get the role from the jwt 
@@ -9,12 +11,12 @@ interface CustomJwtPayload extends JwtPayload {
 }
 interface ServerResponse {
   firstName: string,
-  lastName:string,
-  role:string,
-  birthdate:string
-  phone:string,
-  gender:string,
-  LRN:string,
+  lastName: string,
+  role: string,
+  birthdate: string
+  phone: string,
+  gender: string,
+  LRN: string,
 }
 function Account() {
   const token = useSelector((state: RootState) => state.authReducer.token);
@@ -41,8 +43,8 @@ function Account() {
     role: "",
     phone: "",
     gender: "",
-    birthdate: "",
-    LRN:""
+    birthdate: "2000-01-01",
+    LRN: ""
   })
   const [addressInfo, setAddressInfo] = useState({
     country: "",
@@ -50,6 +52,11 @@ function Account() {
     city: "",
     postal: "",
   })
+  const [response,setResponse] = useState<SuccessResponse>({
+    success : null,
+    message : null,
+    field : null
+  });
 
 
   const fetchUserInfo = async () => {
@@ -59,21 +66,24 @@ function Account() {
           Authorization: `Bearer ${token}`
         }
       })
-      const data:ServerResponse = await res.json();
-      setPersonalInfo({
-        firstName : data.firstName,
-        lastName : data.lastName,
-        role: data.role,
-        phone: data.phone,
-        birthdate: data.birthdate,
-        gender:data.gender,
-        LRN: data.LRN
-      })
+      const data = await res.json();
+      if (data) {
+        setPersonalInfo({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          role: data.role,
+          phone: data.phone ? data.phone : "",
+          birthdate: data.birthdate,
+          gender: data.gender,
+          LRN: data.lrn ? data.lrn : ""
+        })
+      }
+      console.log(data);
+
       // setAddressInfo({
       //   country:data.country,
       //
       // })
-      console.log(data);
     }
   }
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -87,20 +97,26 @@ function Account() {
         },
         method: "POST",
         body: JSON.stringify({
-          FirstName : personalInfo.firstName,
-          LastName : personalInfo.lastName,
-          Role : personalInfo.role,
-          Birthdate : personalInfo.birthdate,
+          FirstName: personalInfo.firstName,
+          LastName: personalInfo.lastName,
+          Role: personalInfo.role,
+          Birthdate: personalInfo.birthdate,
+          Phone : personalInfo.phone,
           Gender: personalInfo.gender,
           LRN: personalInfo.LRN,
-          Country : addressInfo.country,
-          State : addressInfo.state,
-          City : addressInfo.city,
-          PostalCode : addressInfo.postal,
+          Country: addressInfo.country,
+          State: addressInfo.state,
+          City: addressInfo.city,
+          PostalCode: addressInfo.postal,
         })
       });
-        const data = await res.json();
-        console.log(data.response);
+      const data = await res.json();
+      setResponse({
+        success : data.success,
+        message : data.message,
+        field : data.field
+      })
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -142,7 +158,9 @@ function Account() {
                     {personalInfoEdit ? (
                       <input value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} type="text" className="block w-full  border-2 border-customBlue2 bg-transparent px-3 py-2 text-xs rounded-sm outline-none" placeholder="e.g Brent King" />
                     ) : (
+                      <div>
                       <h1 className="font-semibold text-sm">{personalInfo.firstName}</h1>
+                      </div>
                     )}
                   </div>
                   <div className="grid gap-1">
@@ -150,7 +168,10 @@ function Account() {
                     {personalInfoEdit ? (
                       <input value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} type="text" className="block w-full  border-2 border-customBlue2 bg-transparent px-3 py-2 text-xs rounded-sm outline-none" placeholder="e.g Brent King" />
                     ) : (
+                      <div>
                       <h1 className="font-semibold text-sm">{personalInfo.lastName}</h1>
+                      <ErrorMessage fieldName="lastName" response={response}/>
+                      </div>
                     )}
                   </div>
                 </div>
