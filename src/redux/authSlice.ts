@@ -6,7 +6,7 @@ interface IAuth {
 }
 
 const initialState:IAuth = {
-  token : localStorage.getItem("token")
+  token : localStorage.getItem("token"),
 }
 
 
