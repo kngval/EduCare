@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { AppDispatch, RootState } from "../redux/store";
 import dashboardsvg from "../assets/Navbar/dashboard.svg";
 import sectionsvg from "../assets/Navbar/sections.svg";
 import gradesvg from "../assets/Navbar/grades.svg";
@@ -10,14 +10,24 @@ import logo from "../assets/logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { DecodedToken } from "../types/DecodedToken.Types";
 
 function Navbar() {
   const token = useSelector((state: RootState) => state.authReducer.token);
   const location = useLocation();
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch<AppDispatch>();
   const [toggle, setToggle] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if(token){
+      let decodedToken:DecodedToken = jwtDecode(token);
+        
+      console.log(decodedToken);
+      
+    }
+  },[])
 
   if (!token) {
     return;
