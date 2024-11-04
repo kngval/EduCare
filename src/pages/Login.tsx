@@ -5,21 +5,24 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../redux/authSlice";
 import logo from "../assets/logo.svg"
 import ErrorMessage from "../components/ErrorMessage";
+import { AuthPayloadSuccess } from "../types/Response.types";
+import { AppDispatch } from "../redux/store";
+
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [code, setCode] = useState("");
-  const [response, setResponse] = useState({ success: null, message: null, field: null });
+  const [response, setResponse] = useState({ success: false, message: "", field: "" });
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (role == "admin" || role == "teacher") {
 
       try {
-
         const res = await fetch(`${import.meta.env.VITE_URL}/api/auth/login/admin`, {
           headers: {
             "Content-type": "application/json"
@@ -27,8 +30,8 @@ function Login() {
           method: "POST",
           body: JSON.stringify({ email: email, password: password, role: role, code: code })
         })
-        const data = await res.json();
 
+        const data: AuthPayloadSuccess = await res.json();
 
         setResponse({
           success: data.success,
@@ -36,9 +39,9 @@ function Login() {
           field: data.field
         })
 
-        dispatch(setToken(data.token))
 
         if (data.success == true) {
+          dispatch(setToken(data.token))
           setEmail("")
           setPassword("")
           setCode("");
@@ -57,7 +60,7 @@ function Login() {
           method: "POST",
           body: JSON.stringify({ email: email, password: password, role: role })
         })
-        const data = await res.json();
+        const data: AuthPayloadSuccess = await res.json();
 
         setResponse({
           success: data.success,
@@ -65,8 +68,8 @@ function Login() {
           field: data.field
         })
 
-        dispatch(setToken(data.token))
         if (data.success == true) {
+          dispatch(setToken(data.token))
           setEmail("")
           setPassword("")
         }
@@ -105,7 +108,7 @@ function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                  <ErrorMessage fieldName="email" response={response}/>
+                  <ErrorMessage fieldName="email" response={response} />
 
                 </div>
                 <div>
@@ -119,7 +122,7 @@ function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                 <ErrorMessage fieldName="password" response={response}/> 
+                  <ErrorMessage fieldName="password" response={response} />
 
                 </div>
 
@@ -133,7 +136,7 @@ function Login() {
                     <option value="student" className="">Student</option>
                     <option value="teacher" className="">Teacher</option>
                   </select>
-                  <ErrorMessage fieldName="role" response={response}/>
+                  <ErrorMessage fieldName="role" response={response} />
 
 
                 </div>
@@ -150,7 +153,7 @@ function Login() {
                       onChange={(e) => setCode(e.target.value)}
                     />
 
-                    <ErrorMessage fieldName="code" response={response}/>
+                    <ErrorMessage fieldName="code" response={response} />
 
                   </div>
 
