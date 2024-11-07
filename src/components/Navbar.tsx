@@ -19,15 +19,16 @@ function Navbar() {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
   const [toggle, setToggle] = useState<boolean>(false);
+  const [role ,setRole] = useState("");
   
   useEffect(() => {
     if(token){
       let decodedToken:DecodedToken = jwtDecode(token);
-        
       console.log(decodedToken);
-      
+      setRole(decodedToken.role);
+      console.log(role); 
     }
-  },[])
+  },[token])
 
   if (!token) {
     return;
@@ -80,6 +81,16 @@ function Navbar() {
                 <h3 className="font-semibold ">Dashboard</h3>
               </Link>
             </div>
+  
+            {/*admin only endpoint !!!*/}
+            {role && role === "admin" && (
+            <div className="">
+              <Link to="/admin" className={`${isActive("/admin") ? "bg-customLightBlue" : "bg-none"}  px-3  py-4 flex items-center  rounded-lg`}>
+                <img src={dashboardsvg} className="mx-3 w-5" />
+                <h3 className="font-semibold ">Admin / Teacher</h3>
+              </Link>
+            </div>
+            )}
 
             <div className="">
               <Link to="/sections" className={`${isActive("/sections") ? "bg-customLightBlue" : "bg-none"} px-3  py-4 flex items-center  rounded-lg`}>
