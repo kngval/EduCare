@@ -58,7 +58,6 @@ function Account() {
     field: null
   });
 
-
   const fetchUserInfo = async () => {
     if (token) {
       const res = await fetch(`${import.meta.env.VITE_URL}/api/account/get-userinfo`, {
@@ -130,7 +129,7 @@ function Account() {
     <div className="grow mb-28">
       <div className="flex z-10 justify-center px-10 mt-12">
 
-        <div className="userInfo-container w-full lg:w-[700px] xl:w-[850px] overflow-scroll">
+        <div className="userInfo-container w-full lg:w-[700px] xl:w-[850px]">
           <div className="grid gap-5 md:gap-10">
             <div className={sectionStyle}>
 
