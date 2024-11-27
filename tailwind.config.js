@@ -8,23 +8,23 @@ export default {
         customBlue: "#141332",
         customBlue2: "#1D1D41",
         customBlue3: "#3A3A65",
-        customLightBlue:"#6359E9",
-        customPlaceholder: "#27264E"
+        customLightBlue: "#6359E9",
+        customPlaceholder: "#27264E",
       },
       backgroundColor: {
         customBlue: "#141332",
         customBlue2: "#1D1D41",
         customBlue3: "#3A3A65",
-        customLightBlue:"#6359E9",
-        customPlaceholder: "#27264E"
+        customLightBlue: "#6359E9",
+        customPlaceholder: "#27264E",
       },
-      borderColor : {
+      borderColor: {
         customBlue: "#141332",
         customBlue2: "#1D1D41",
         customBlue3: "#3A3A65",
-        customLightBlue:"#6359E9",
-        customPlaceholder: "#27264E"
-      }
+        customLightBlue: "#6359E9",
+        customPlaceholder: "#27264E",
+      },
     },
   },
   plugins: [],
