@@ -34,7 +34,10 @@ function Sections() {
       <div className="bg-customBlue2 px-8">
         <div>
           <div>
-            <label>Room</label>
+            <label>Room Name</label>
+            <input type="text" className="block bg-customBlue border-2 border-customLightBlue" />
+            
+            <label>Room Code</label>
             <input type="text" className="block bg-customBlue border-2 border-customLightBlue" />
           </div>
         </div>
