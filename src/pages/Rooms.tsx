@@ -31,14 +31,17 @@ function Sections() {
 
   return (
     <div className="grow mb-10 mt-20 px-12">
-      <div className="bg-customBlue2 px-8">
-        <div>
+      <div className="text-2xl font-bold ">Room Creation</div>
+      <div className="text-sm text-gray-500 mb-4">Room - Create Room</div>
+      <div className="bg-customBlue2 px-8 py-6 rounded-md">
+        <div className="text-sm">
           <div>
             <label>Room Name</label>
-            <input type="text" className="block bg-customBlue border-2 border-customLightBlue" />
+            <input type="text" className="block bg-customBlue rounded-md outline-none px-2" />
             
             <label>Room Code</label>
-            <input type="text" className="block bg-customBlue border-2 border-customLightBlue" />
+            <input type="text" className="block bg-customBlue rounded-md outline-none px-2" />
+            
           </div>
         </div>
         <div className=" flex justify-end px-5 ">
