@@ -33,71 +33,77 @@ function Sections() {
     <div className="grow mb-10 mt-20 px-12">
       <div className="text-2xl font-bold ">Room Creation</div>
       <div className="text-sm text-gray-500 mb-4">Room - Create Room</div>
-      <div className="bg-customBlue2 px-8 py-6 rounded-md">
-        <div className="text-sm">
-          <div>
-            <label>Room Name</label>
-            <input type="text" className="block bg-customBlue rounded-md outline-none px-2" />
-            
-            <label>Room Code</label>
-            <input type="text" className="block bg-customBlue rounded-md outline-none px-2" />
-            
+
+      {/* Room Creation */}
+      <div className="flex justify-end mb-5">
+        <div className="bg-customBlue2 rounded-md p-6">
+          <div className="text-sm">
+            <div className="">
+              <label>Room Name</label>
+              <input
+                type="text"
+                className="block bg-customBlue rounded-md outline-none py-1 px-2 mb-4"
+              />
+            </div>
           </div>
-        </div>
-        <div className=" flex justify-end px-5 ">
-          <div className="bg-customLightBlue lg:w-[200px] flex justify-center items-center gap-3 text-sm p-2  rounded-lg">
-            <svg
-              className="w-[20px] lg:w-[15px]"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="#ffffff"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                {" "}
-                <title></title>{" "}
-                <g id="Complete">
+          <div className="">
+            <div className="bg-customLightBlue  flex justify-center items-center gap-3 text-sm p-2  rounded-lg">
+              <svg
+                className="w-[20px] lg:w-[15px]"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#ffffff"
+              >
+                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
                   {" "}
-                  <g data-name="add" id="add-2">
+                  <title></title>{" "}
+                  <g id="Complete">
                     {" "}
-                    <g>
+                    <g data-name="add" id="add-2">
                       {" "}
-                      <line
-                        fill="none"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        x1="12"
-                        x2="12"
-                        y1="19"
-                        y2="5"
-                      ></line>{" "}
-                      <line
-                        fill="none"
-                        stroke="#fff"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        x1="5"
-                        x2="19"
-                        y1="12"
-                        y2="12"
-                      ></line>{" "}
+                      <g>
+                        {" "}
+                        <line
+                          fill="none"
+                          stroke="#fff"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          x1="12"
+                          x2="12"
+                          y1="19"
+                          y2="5"
+                        ></line>{" "}
+                        <line
+                          fill="none"
+                          stroke="#fff"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          x1="5"
+                          x2="19"
+                          y1="12"
+                          y2="12"
+                        ></line>{" "}
+                      </g>{" "}
                     </g>{" "}
                   </g>{" "}
-                </g>{" "}
-              </g>
-            </svg>
-            <button className="hidden md:block">Create Room</button>
+                </g>
+              </svg>
+              <button className="hidden md:block">Create Room</button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Fetch Rooms */}
+    <div className="bg-customBlue2 rounded-md p-6">asdasd</div>
     </div>
   );
 }
