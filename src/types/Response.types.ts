@@ -11,3 +11,8 @@ export type AuthPayloadSuccess = {
   token : string,
   role : string
 }
+
+export type RoomResponse = {
+  success : boolean,
+  message : string
+}
