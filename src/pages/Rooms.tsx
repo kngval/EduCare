@@ -27,6 +27,7 @@ function Sections() {
         }
       );
       const data = await res.json();
+      setRooms(data);
       console.log(data);
     } catch (error) {
       console.error(error);
