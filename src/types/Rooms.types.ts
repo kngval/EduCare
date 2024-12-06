@@ -1,4 +1,5 @@
 export type RoomType = {
-  success: boolean;
-  message: string;
+  id: number;
+  roomCode: string;
+  subjectName: string;
 };
