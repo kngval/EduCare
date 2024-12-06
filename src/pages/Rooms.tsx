@@ -9,11 +9,12 @@ function Sections() {
   const [rooms, setRooms] = useState<RoomType[]>();
   const [roomName, setRoomName] = useState<string>("");
   const [roomResponse, setRoomResponse] = useState<RoomResponse | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
   useEffect(() => {
     if (token) {
       fetchRooms();
     }
-  }, []);
+  }, [refresh]);
 
   const fetchRooms = async () => {
     try {
@@ -56,6 +57,7 @@ function Sections() {
         success: data.success,
         message: data.message,
       });
+      setRefresh(!refresh);
     } catch (error) {
       console.error(error);
       return;
@@ -198,7 +200,28 @@ function Sections() {
       </div>
 
       {/* Fetch Rooms */}
-      <div className="bg-customBlue2 rounded-md p-6">asdasd</div>
+      <div className="">
+        {rooms && rooms?.length <= 0 ? (
+          <div className="bg-customBlue2 rounded-md p-6">
+            No rooms available.
+          </div>
+        ) : (
+          rooms?.map((room) => (
+            <div key={room.id} className="bg-customBlue2 mb-4 p-6 rounded-md">
+              <div className="text-xl font-bold">
+                {room.subjectName.slice(0, 1).toUpperCase() +
+                  room.subjectName.slice(1, room.subjectName.length)}
+              </div>
+
+              <div className="flex justify-end">
+                <div className="bg-customLightBlue px-4 py-2 text-sm rounded-md">
+                  View
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
