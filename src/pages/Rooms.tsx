@@ -3,13 +3,19 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { RoomType } from "../types/Rooms.types";
 import { RoomResponse } from "../types/Response.types";
+import { useNavigate } from "react-router-dom";
 
 function Sections() {
   const token = useSelector((state: RootState) => state.authReducer.token);
+  const navigate = useNavigate();
+
+  // States
   const [rooms, setRooms] = useState<RoomType[]>();
   const [roomName, setRoomName] = useState<string>("");
   const [roomResponse, setRoomResponse] = useState<RoomResponse | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
+
+  //Fetch Rooms List
   useEffect(() => {
     if (token) {
       fetchRooms();
@@ -36,6 +42,7 @@ function Sections() {
     }
   };
 
+  //Create room
   const createRoom = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -62,6 +69,11 @@ function Sections() {
       console.error(error);
       return;
     }
+  };
+
+  //View room details
+  const viewRoomDetails = (id: number) => {
+    navigate(`/rooms/${id}`);
   };
 
   return (
@@ -214,7 +226,10 @@ function Sections() {
               </div>
 
               <div className="flex justify-end">
-                <div className="bg-customLightBlue px-4 py-2 text-sm rounded-md">
+                <div
+                  onClick={() => viewRoomDetails(room.id)}
+                  className="bg-customLightBlue px-4 py-2 text-sm rounded-md"
+                >
                   View
                 </div>
               </div>
