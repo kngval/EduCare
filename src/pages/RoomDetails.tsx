@@ -1,5 +1,8 @@
 const RoomDetails = () => {
-  return <div></div>;
+  return <div>
+    {/*Room details here */}
+    const roomId = useParams();
+  </div>;
 };
 
 export default RoomDetails;
