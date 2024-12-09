@@ -93,7 +93,7 @@ function Navbar() {
             )}
 
             <div className="">
-              <Link to="/sections" className={`${isActive("/sections") ? "bg-customLightBlue" : "bg-none"} px-3  py-4 flex items-center  rounded-lg`}>
+              <Link to="/rooms" className={`${isActive("/rooms")  ? "bg-customLightBlue" : "bg-none"} px-3  py-4 flex items-center  rounded-lg`}>
                 <img src={sectionsvg} className="mx-3 w-5" />
                 <h3 className="font-semibold ">Rooms</h3>
               </Link>
