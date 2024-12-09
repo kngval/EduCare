@@ -10,6 +10,7 @@ import Rooms from "./pages/Rooms";
 import Grades from "./pages/Grades";
 import Account from "./pages/Account";
 import Admin from "./pages/Admin";
+import RoomDetails from "./pages/RoomDetails";
 function App() {
   const token = useSelector((state: RootState) => state.authReducer.token);
   return (
@@ -40,8 +41,13 @@ function App() {
           />
 
           <Route
-            path="/sections"
+            path="/rooms"
             element={token ? <Rooms /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/rooms/:id"
+            element={token ? <RoomDetails /> : <Navigate to="/login" />}
           />
           <Route
             path="/grades"
