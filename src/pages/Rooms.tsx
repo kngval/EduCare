@@ -13,14 +13,13 @@ function Sections() {
   const [rooms, setRooms] = useState<RoomType[]>();
   const [roomName, setRoomName] = useState<string>("");
   const [roomResponse, setRoomResponse] = useState<RoomResponse | null>(null);
-  const [refresh, setRefresh] = useState<boolean>(false);
 
   //Fetch Rooms List
   useEffect(() => {
     if (token) {
       fetchRooms();
     }
-  }, [refresh]);
+  }, []);
 
   const fetchRooms = async () => {
     try {
@@ -35,6 +34,8 @@ function Sections() {
       );
       const data = await res.json();
       setRooms(data);
+
+      console.log("fetching resource");
       console.log(data);
     } catch (error) {
       console.error(error);
@@ -64,7 +65,9 @@ function Sections() {
         success: data.success,
         message: data.message,
       });
-      setRefresh(!refresh);
+      fetchRooms();
+      setRoomName("");
+
     } catch (error) {
       console.error(error);
       return;
@@ -219,7 +222,7 @@ function Sections() {
           </div>
         ) : (
           rooms?.map((room) => (
-            <div key={room.id} className="bg-customBlue2 mb-4 p-6 rounded-md">
+            <div key={room.id} className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer">
               <div className="text-xl font-bold">
                 {room.subjectName.slice(0, 1).toUpperCase() +
                   room.subjectName.slice(1, room.subjectName.length)}
