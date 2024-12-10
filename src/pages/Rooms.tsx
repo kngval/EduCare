@@ -4,11 +4,18 @@ import { RootState } from "../redux/store";
 import { RoomType } from "../types/Rooms.types";
 import { RoomResponse } from "../types/Response.types";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { JwtDecodeType } from "../types/JwtDecode.types";
 
 function Sections() {
   const token = useSelector((state: RootState) => state.authReducer.token);
+  if(!token){
+    return null;
+  }
+  const role = jwtDecode<JwtDecodeType>(token).role;
   const navigate = useNavigate();
-
+  
+  
   // States
   const [rooms, setRooms] = useState<RoomType[]>();
   const [roomName, setRoomName] = useState<string>("");
@@ -24,7 +31,7 @@ function Sections() {
   const fetchRooms = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_URL}/api/room/fetch-rooms`,
+        `${import.meta.env.VITE_URL}/api/room/fetch-rooms/admin?role=${role}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
