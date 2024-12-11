@@ -1,6 +1,6 @@
 import { SuccessResponse } from "../types/Response.types";
 
-  const ErrorMessage = ({ fieldName,response }: { fieldName: string,response:SuccessResponse }) => {
+  const ErrorMessage = ({ fieldName,response }: { fieldName: string,response:SuccessResponse | null}) => {
     return response && response.success === false && response.field === fieldName ? (
       <div className="text-sm text-red-500 flex items-center mt-2 gap-1">
         <svg className="w-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#EF4444">
