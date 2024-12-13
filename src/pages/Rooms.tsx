@@ -4,40 +4,39 @@ import { RootState } from "../redux/store";
 import { RoomType } from "../types/Rooms.types";
 import { RoomResponse } from "../types/Response.types";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import { JwtDecodeType } from "../types/JwtDecode.types";
+import { getRole } from "../utils/getRole";
 
 function Sections() {
   const token = useSelector((state: RootState) => state.authReducer.token);
-  if(!token){
+  if (!token) {
     return null;
   }
-  const role = jwtDecode<JwtDecodeType>(token).role;
   const navigate = useNavigate();
-  
-  
+
   // States
   const [rooms, setRooms] = useState<RoomType[]>();
   const [roomName, setRoomName] = useState<string>("");
   const [roomResponse, setRoomResponse] = useState<RoomResponse | null>(null);
 
+  const role = getRole(token);
   //Fetch Rooms List
   useEffect(() => {
     if (token) {
       fetchRooms();
+      console.log(role);
     }
-  }, []);
+  }, [token]);
 
   const fetchRooms = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_URL}/api/room/fetch-rooms/admin?role=${role}`,
+        `${import.meta.env.VITE_URL}/api/room/fetch-rooms${role == "admin" ? `/admin?role=${role}` : ""}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
           method: "GET",
-        }
+        },
       );
       const data = await res.json();
       setRooms(data);
@@ -64,7 +63,7 @@ function Sections() {
           },
           method: "POST",
           body: JSON.stringify({ roomName: roomName }),
-        }
+        },
       );
       const data = await res.json();
       console.log(data);
@@ -74,7 +73,6 @@ function Sections() {
       });
       fetchRooms();
       setRoomName("");
-
     } catch (error) {
       console.error(error);
       return;
@@ -92,7 +90,7 @@ function Sections() {
       <div className="text-sm text-gray-500 mb-4">Room - Create Room</div>
 
       {/* Room Creation */}
-      <div className="flex justify-end mb-5">
+      <div className="flex justify-center mb-5">
         <form onSubmit={createRoom} className="bg-customBlue2 rounded-md p-6">
           <div className="text-sm">
             <div className="">
@@ -229,12 +227,17 @@ function Sections() {
           </div>
         ) : (
           rooms?.map((room) => (
-            <div key={room.id} className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer">
+            <div
+              key={room.id}
+              className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer"
+            >
               <div className="text-xl font-bold">
                 {room.subjectName.slice(0, 1).toUpperCase() +
                   room.subjectName.slice(1, room.subjectName.length)}
               </div>
-
+              <div className="text-sm text-gray-500">
+                {room.teacherName ? room.teacherName : "No teacher available"}
+              </div>
               <div className="flex justify-end">
                 <div
                   onClick={() => viewRoomDetails(room.id)}
