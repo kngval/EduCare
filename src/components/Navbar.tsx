@@ -11,28 +11,20 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import { DecodedToken } from "../types/DecodedToken.Types";
+import { getRole } from "../utils/getRole";
 
 function Navbar() {
   const token = useSelector((state: RootState) => state.authReducer.token);
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
   const [toggle, setToggle] = useState<boolean>(false);
-  const [role ,setRole] = useState("");
-  
-  useEffect(() => {
-    if(token){
-      let decodedToken:DecodedToken = jwtDecode(token);
-      console.log(decodedToken);
-      setRole(decodedToken.role);
-      console.log(role); 
-    }
-  },[token])
+  // const [role ,setRole] = useState("");
+      
 
   if (!token) {
     return;
   }
+  const role = getRole(token);
 
   function isActive(path: string): boolean {
     return location.pathname.startsWith(path);
