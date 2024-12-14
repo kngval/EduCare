@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AppDispatch, RootState } from "../redux/store";
+import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { TRoomDetails } from "../types/Rooms.types";
 
