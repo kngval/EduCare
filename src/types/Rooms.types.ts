@@ -5,6 +5,17 @@ export type RoomType = {
   teacherName : string;
 };
 
+export type TFetchRoomsNonAdmin = {
+  id : number;
+  roomId : number;
+  studentId : number;
+  room :  {
+    subjectName : string;
+    teacherName : string;
+    roomCode : string;
+  }
+}
+
 export type TRoomDetails = {
   id : number,
   roomCode : string,
