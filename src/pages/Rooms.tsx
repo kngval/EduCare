@@ -220,7 +220,7 @@ function Sections() {
                     {room.subjectName.slice(0, 1).toUpperCase() +
                       room.subjectName.slice(1, room.subjectName.length)}
                   </div>
-                    <div> - </div>
+                  <div> - </div>
                   <div className="text-sm text-gray-500">
                     {room.teacherName ? room.teacherName : "No teacher available"}
                   </div>
@@ -262,6 +262,7 @@ function Sections() {
                     {room.room.teacherName ? room.room.teacherName : "No teacher available"}
                   </div>
                 </div>
+                <div>Room Code : <span className="">{room.room.roomCode}</span></div>
 
                 <div className="flex justify-end">
                   <div
