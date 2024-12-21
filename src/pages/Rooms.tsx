@@ -130,7 +130,7 @@ function Sections() {
       {role == "admin" && (
 
         <div className="flex justify-center mb-5">
-          <form onSubmit={createRoom} className="bg-customBlue2 border-2 border-customLightBlue rounded-md p-6">
+          <form onSubmit={createRoom} className="w-1/2 bg-customBlue2 border-2 border-customLightBlue rounded-md p-6">
             <div className="text-sm">
               <div className="">
                 <label>Room Name</label>
@@ -171,12 +171,12 @@ function Sections() {
       {/*USER FORM IF NOT AN ADMIN (JOIN ROOM ONLY)*/}
       {role != "admin" && (
         <div className="flex justify-end mb-5">
-          <form className="bg-customBlue2 rounded-md p-6 border-2 border-customLightBlue" onSubmit={submitJoinRoom}>
+          <form className="w-full sm:w-1/2 text-sm lg:w-1/3 bg-customBlue2 rounded-md p-6 border-2 border-customLightBlue" onSubmit={submitJoinRoom}>
             <label className="text-sm">Join Room : </label>
             <input type="text"
               value={joinRoom}
               onChange={(e) => setJoinRoom(e.target.value)}
-              className="block bg-customBlue rounded-md outline-none py-1 px-2"
+              className="block w-full bg-customBlue rounded-md outline-none py-1 px-2"
             />
 
             <button className="bg-customLightBlue w-full flex justify-center items-center gap-3 text-sm p-2  rounded-md mt-2">
@@ -186,11 +186,11 @@ function Sections() {
             {joinRoomResponse?.success == true && (
               <div className="flex items-center justify-center text-sm mt-5 gap-2 text-[#928EF2]">
                 <img src={checkSvg} className="w-5" />
-                <div className="text-center">{joinRoomResponse.message}</div>
+                <div className="text-center w-[80%]">{joinRoomResponse.message}</div>
               </div>
             )}
             {joinRoomResponse?.success == false && (
-              <div className="flex items-center justify-center text-sm mt-5 gap-2 text-red-500">
+              <div className=" flex items-center justify-center text-sm mt-5 gap-2 text-red-500">
                 <img src={crossSvg} className="w-5" />
                 <div className="text-center">{joinRoomResponse?.message}</div>
               </div>
@@ -250,7 +250,7 @@ function Sections() {
             nonAdminRooms?.map((room) => (
               <div
                 key={room.roomId}
-                className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer"
+                className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer border-2 border-customLightBlue"
               >
                 <div className="flex items-center gap-2">
                   <div className="text-xl font-bold">
