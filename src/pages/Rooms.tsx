@@ -115,6 +115,7 @@ function Sections() {
 
       const data = await res.json();
       setJoinRoomResponse(data);
+      fetchRooms();
       console.log(data);
     } catch (err) {
       console.error(err);
@@ -225,6 +226,8 @@ function Sections() {
                     {room.teacherName ? room.teacherName : "No teacher available"}
                   </div>
                 </div>
+
+                <div>Room Code : {room.roomCode}</div>
                 <div className="flex justify-end">
                   <div
                     onClick={() => viewRoomDetails(room.id)}
