@@ -8,15 +8,14 @@ const RoomDetails = () => {
   const { id } = useParams();
   const { token } = useSelector((state: RootState) => state.authReducer);
   //States
-  const [room, setRoom] = useState<TRoomDetails>();
-
+  const [room, setRoom] = useState<TRoomDetails | null>(null);
 
   useEffect(() => {
     if (token) {
       fetchRoomDetails();
-      console.log("room :", room);
     }
   }, []);
+
   const fetchRoomDetails = async () => {
     try {
       const res = await fetch(
@@ -29,13 +28,27 @@ const RoomDetails = () => {
           method: "GET",
         },
       );
+      if (!res.ok) {
+        setRoom(null);
+        console.log(room);
+      }
+
       const data = await res.json();
       setRoom(data);
-      console.log("response : ", data);
     } catch (err) {
       console.error(err);
+      setRoom(null);
     }
   };
+  
+  useEffect(() => console.log(room),[room])
+  
+  if(room == null) {
+    return (
+    <div className="grow mb-10 px-12 text-center text-2xl font-bold mt-20">404 Not Found</div>
+    )
+  }
+
   return (
     <div className="grow mb-10 mt-20 px-12">
       <div>
