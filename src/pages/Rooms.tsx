@@ -214,7 +214,7 @@ function Sections() {
             rooms?.map((room) => (
               <div
                 key={room.id}
-                className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer border-2 border-customLightBlue"
+                className="bg-customBlue2 mb-4 p-6 rounded-md  border-2 border-customLightBlue"
               >
                 <div className="flex items-center gap-2">
                   <div className="text-xl font-bold">
@@ -231,7 +231,7 @@ function Sections() {
                 <div className="flex justify-end">
                   <div
                     onClick={() => viewRoomDetails(room.id)}
-                    className="bg-customLightBlue px-4 py-2 text-sm rounded-md"
+                    className="bg-customLightBlue px-4 py-2 text-sm rounded-md cursor-pointer"
                   >
                     View
                   </div>
