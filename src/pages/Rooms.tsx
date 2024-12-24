@@ -130,11 +130,11 @@ function Sections() {
       <div className="text-sm text-gray-500 mb-4">{role == "admin" ? "Room - Create Room" : "Room - View Rooms"}</div>
       {role == "admin" && (
 
-        <div className="flex justify-center mb-5">
-          <form onSubmit={createRoom} className="w-1/2 bg-customBlue2 border-2 border-customLightBlue rounded-md p-6">
+        <div className="flex justify-end mb-5">
+          <form onSubmit={createRoom} className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2 border-2 border-customLightBlue rounded-md p-6">
             <div className="text-sm">
               <div className="">
-                <label>Room Name</label>
+                <label>Room Name : </label>
                 <input
                   type="text"
                   value={roomName}
@@ -142,7 +142,7 @@ function Sections() {
                     setRoomName(e.target.value);
                     setRoomResponse(null);
                   }}
-                  className="block bg-customBlue rounded-md outline-none py-1 px-2 "
+                  className="w-full block bg-customBlue rounded-md outline-none py-1 px-2 "
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@ function Sections() {
       {/*USER FORM IF NOT AN ADMIN (JOIN ROOM ONLY)*/}
       {role != "admin" && (
         <div className="flex justify-end mb-5">
-          <form className="w-full sm:w-1/2 text-sm lg:w-1/3 bg-customBlue2 rounded-md p-6 border-2 border-customLightBlue" onSubmit={submitJoinRoom}>
+          <form className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2 rounded-md p-6 border-2 border-customLightBlue" onSubmit={submitJoinRoom}>
             <label className="text-sm">Join Room : </label>
             <input type="text"
               value={joinRoom}
@@ -214,7 +214,7 @@ function Sections() {
             rooms?.map((room) => (
               <div
                 key={room.id}
-                className="bg-customBlue2 mb-4 p-6 rounded-md  border-2 border-customLightBlue"
+                className="bg-customBlue2 mb-4 p-6 rounded-md "
               >
                 <div className="flex items-center gap-2">
                   <div className="text-xl font-bold">
