@@ -37,6 +37,9 @@ function Sections() {
     }
   }, [token]);
 
+  useEffect(() => {
+    console.log("ROOMZZ : ",rooms);
+  }, [rooms]);
   const fetchRooms = async () => {
     try {
       console.log("executing fetch rooms");
@@ -51,8 +54,7 @@ function Sections() {
       );
       const data = await res.json();
       console.log(data);
-      if (role == "admin") {
-
+      if (role == "admin" || role == "teacher") {
         setRooms(data);
       } else {
         setNonAdminRooms(data);
@@ -203,7 +205,7 @@ function Sections() {
 
       {/* Fetch Rooms */}
 
-      {role == "admin" && (
+      {(role == "admin" || role == "teacher") && (
 
         <div className="">
           {rooms && rooms?.length <= 0 ? (
@@ -242,7 +244,7 @@ function Sections() {
         </div>
       )}
 
-      {role != "admin" && (
+      {role == "student" && (
 
         <div className="">
           {nonAdminRooms && nonAdminRooms.length <= 0 ? (
