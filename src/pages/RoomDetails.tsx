@@ -16,6 +16,10 @@ const RoomDetails = () => {
     }
   }, []);
 
+  useEffect(() => { 
+    console.log(room);
+  },[room])
+
   const fetchRoomDetails = async () => {
     try {
       const res = await fetch(
