@@ -85,10 +85,10 @@ function Signup() {
   return (
     <div className="bg-customBlue flex lg:min-h-screen w-full mt-[5rem] lg:mt-0 justify-center lg:items-center">
       <div className="authContainer bg-customBlue2 p-12 mb-24 lg:mb-0 rounded-sm w-full sm:w-[500px] lg:w-[800px] xl:w-[1000px]">
-        <div className="flex gap-3 items-center mb-10">
+        <Link to="/" className="flex gap-3 items-center mb-10 cursor-pointer">
           <img src={logo} className="w-[30px]" />
           <h1 className="text-2xl text-white font-bold">EduCare</h1>
-        </div>
+        </Link>
 
         <div className="grid grid-cols-6 gap-10">
           <div className="col-span-6 lg:col-span-3">
