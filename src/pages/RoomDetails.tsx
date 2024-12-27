@@ -13,12 +13,13 @@ const RoomDetails = () => {
   useEffect(() => {
     if (token) {
       fetchRoomDetails();
+      fetchRoomsStudent();
     }
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     console.log(room);
-  },[room])
+  }, [room])
 
   const fetchRoomDetails = async () => {
     try {
@@ -44,12 +45,49 @@ const RoomDetails = () => {
       setRoom(null);
     }
   };
-  
-  useEffect(() => console.log(room),[room])
-  
-  if(room == null) {
+
+  const fetchRoomsStudent = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_URL}/api/room/fetch-students/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json"
+        },
+        method: "GET",
+      });
+
+      // Check if response is OK
+      if (!res.ok) {
+        console.error(`Error: ${res.status} ${res.statusText}`);
+        return;
+      }
+
+      // Check if response body is empty
+      const text = await res.text(); // Read response as text
+      if (!text) {
+        console.warn("Warning: Response body is empty.");
+        return;
+      }
+
+      // Parse JSON safely
+      try {
+        const data = JSON.parse(text);
+        console.log("STUDENTS:", data);
+      } catch (jsonError) {
+        console.error("Error parsing JSON:", jsonError);
+      }
+
+    } catch (err) {
+      console.error(err);
+      return;
+    }
+  }
+
+  useEffect(() => console.log(room), [room])
+
+  if (room == null) {
     return (
-    <div className="grow mb-10 px-12 text-center text-2xl font-bold mt-20">404 Not Found</div>
+      <div className="grow mb-10 px-12 text-center text-2xl font-bold mt-20">404 Not Found</div>
     )
   }
 
