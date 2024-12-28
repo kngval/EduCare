@@ -23,3 +23,21 @@ export type TRoomDetails = {
   teacherId : number | null,
   teacherName : string | null
 }
+
+export type TFetchRoomStudents = {
+  id : number,
+  email : string,
+  grade : number | null,
+  role : string,
+  userInfo : {
+    firstName : string,
+    lastName : string,
+    gender : string,
+    phone : string,
+    lrn : string,
+    country : string,
+    city: string,
+    state : string
+  }
+
+}
