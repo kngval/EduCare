@@ -128,7 +128,7 @@ const RoomDetails = () => {
         </div>
       </div>
       {selectedStudent && (
-        <div className="sticky p-12 w-96 bg-customBlue2 rounded-md">
+        <div className="sticky p-12 w-96 bg-customBlue2 rounded-md lg:hidden hidden xl:block">
           <div className="flex justify-center">
             <img className="w-36 mb-5" src={selectedStudent.userInfo.gender == "Male" ? boySvg : girlSvg} />
           </div>
@@ -151,7 +151,7 @@ const RoomDetails = () => {
             <div className="flex justify-between">
               <div>
                 <h1 className="font-bold">Age</h1>
-                <h3 className="text-gray-500">20</h3>
+                <h3 className="text-gray-500">{selectedStudent.userInfo.age}</h3>
 
               </div>
 
@@ -179,6 +179,7 @@ const RoomDetails = () => {
 
             </div>
 
+            <button onClick={() => setSelectedStudent(null)} className="bg-customLightBlue py-3 rounded-md mt-20">Close</button>
           </div>
 
         </div>
