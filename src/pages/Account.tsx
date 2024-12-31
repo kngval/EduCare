@@ -12,6 +12,7 @@ interface CustomJwtPayload extends JwtPayload {
 interface ServerResponse {
   firstName: string;
   lastName: string;
+  age:string;
   role: string;
   birthdate: string;
   phone: string;
@@ -40,6 +41,7 @@ function Account() {
   const [personalInfo, setPersonalInfo] = useState<ServerResponse>({
     firstName: "",
     lastName: "",
+    age : "",
     role: "",
     phone: "",
     gender: "",
@@ -69,6 +71,7 @@ function Account() {
         setPersonalInfo({
           firstName: data.firstName,
           lastName: data.lastName,
+          age : data.age,
           role: data.role,
           phone: data.phone ? data.phone : "",
           birthdate: data.birthdate,
@@ -100,6 +103,7 @@ function Account() {
           body: JSON.stringify({
             FirstName: personalInfo.firstName,
             LastName: personalInfo.lastName,
+            Age : parseInt(personalInfo.age),
             Role: personalInfo.role,
             Birthdate: personalInfo.birthdate,
             Phone: personalInfo.phone,
@@ -246,6 +250,30 @@ function Account() {
                 </div>
 
                 <div className=" md:grow grid text-gray-300 sm:my-2 sm:grid-cols-2 md:grid-cols-3 gap-2  text-xs">
+
+                  <div className="grid gap-1 text-xs">
+                    <label className="">Age :</label>
+                    {personalInfoEdit ? (
+                      <input
+                        value={personalInfo.age}
+                        onChange={(e) => {
+                          setResponse(null)
+                          setPersonalInfo({
+                            ...personalInfo,
+                          age: e.target.value 
+                          });
+                        }}
+                        type="number"
+                        className={inputStyle}
+                        placeholder=""
+                      />
+                    ) : (
+                      <h1 className="font-semibold text-sm">
+                        {personalInfo.age}
+                      </h1>
+                    )}
+                  </div>
+
                   <div className="grid gap-1 text-xs">
                     <label className="">Birthdate :</label>
                     {personalInfoEdit ? (
