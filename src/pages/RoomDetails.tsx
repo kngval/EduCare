@@ -14,7 +14,7 @@ const RoomDetails = () => {
   const [room, setRoom] = useState<TRoomDetails | null>(null);
   const [students, setStudents] = useState<TFetchRoomStudents[]>();
   const [selectedStudent, setSelectedStudent] = useState<TFetchRoomStudents | null>(null);
-  const [gradedStudent, setGradedStudent] = useState<boolean>(false);
+  const [gradedStudent, setGradedStudent] = useState<TFetchRoomStudents | null>(null);
   useEffect(() => {
     if (token) {
       fetchRoomDetails();
@@ -79,7 +79,8 @@ const RoomDetails = () => {
     setSelectedStudent(student);
   }
 
-  const gradeStudent = (id: number) => {
+  const gradeStudent = (student: TFetchRoomStudents) => {
+    setGradedStudent(student)
   }
 
   useEffect(() => console.log(selectedStudent), [selectedStudent]);
@@ -94,7 +95,7 @@ const RoomDetails = () => {
 
   return (
     <div className="grow flex gap-10 mb-10 mt-20 px-12">
-      <div className="grow">
+      <div className="grow relative">
         <div>
           <div className="text-2xl font-bold ">
             {room
@@ -117,23 +118,25 @@ const RoomDetails = () => {
         <div className="grid gap-5">
           {students && students.length > 0 && students.map((student) => (
             <div className="grid grid-cols-12">
-              <div key={student.id} onClick={() => viewProfile(student)} className="col-span-11 bg-customBlue2 rounded-md py-3 px-6 grid grid-cols-5 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500">
+              <div key={student.id} onClick={() => viewProfile(student)} className="col-span-11 bg-customBlue2 rounded-l-md py-3 px-6 grid grid-cols-4 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500">
                 <div className="flex gap-5 items-center">
                   <img className="w-8" src={student.userInfo.gender == "Male" ? boySvg : girlSvg} />
                   <h1>{student.userInfo.firstName + " " + student.userInfo.lastName}</h1>
                 </div>
-                <h6 className="">{student.role.slice(0, 1).toUpperCase() + student.role.slice(1, student.role.length)}</h6>
 
+                <h6 className="">{student.role.slice(0, 1).toUpperCase() + student.role.slice(1, student.role.length)}</h6>
                 <h6 className="">{student.email}</h6>
                 <h6 className="">{student.userInfo.gender}</h6>
               </div>
-              <div className="bg-customBlue2 rounded-md">
-                <img className="w-5" src={gradeSvg}/>
+              <div onClick={() => gradeStudent(student)} className="bg-customBlue2 rounded-r-md flex justify-center items-center">
+                <img className="w-5" src={gradeSvg} />
               </div>
             </div>
           ))}
 
         </div>
+
+
       </div>
       {selectedStudent && (
         <div className="sticky p-12 w-96 bg-customBlue2 rounded-md lg:hidden hidden xl:block">
@@ -194,8 +197,14 @@ const RoomDetails = () => {
       )}
 
       {gradedStudent && (
-        <div className="fixed p-6 bg-customBlue2"></div>
+        <div className="fixed left-1/2 top-10 bg-customBlue2 p-8 rounded-md backdrop-blur-3xl">
+          <div>
+            <h1 className="text-xl font-bold rounded-md">Grade Student</h1>
+            <h3>{gradedStudent.userInfo.firstName + " " + gradedStudent.userInfo.lastName}</h3>
+          </div>
+        </div>
       )}
+
     </div>
   );
 };
