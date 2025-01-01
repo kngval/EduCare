@@ -6,7 +6,7 @@ import { TFetchRoomStudents, TRoomDetails } from "../types/Rooms.types";
 import girlSvg from "../assets/rooms/girl.svg";
 import boySvg from "../assets/rooms/boy.svg";
 import gradeSvg from "../assets/rooms/grade.svg";
-
+import removeSvg from "../assets/rooms/cross.svg";
 const RoomDetails = () => {
   const { id } = useParams();
   const { token } = useSelector((state: RootState) => state.authReducer);
@@ -14,6 +14,7 @@ const RoomDetails = () => {
   const [room, setRoom] = useState<TRoomDetails | null>(null);
   const [students, setStudents] = useState<TFetchRoomStudents[]>();
   const [selectedStudent, setSelectedStudent] = useState<TFetchRoomStudents | null>(null);
+  const [gradedStudent, setGradedStudent] = useState<boolean>(false);
   useEffect(() => {
     if (token) {
       fetchRoomDetails();
@@ -78,6 +79,9 @@ const RoomDetails = () => {
     setSelectedStudent(student);
   }
 
+  const gradeStudent = (id: number) => {
+  }
+
   useEffect(() => console.log(selectedStudent), [selectedStudent]);
 
   useEffect(() => console.log(room), [room])
@@ -112,16 +116,20 @@ const RoomDetails = () => {
         <div className="text-xl font-bold mt-20 mb-2 ">Students</div>
         <div className="grid gap-5">
           {students && students.length > 0 && students.map((student) => (
-            <div key={student.id} onClick={() => viewProfile(student)} className="bg-customBlue2 rounded-md py-3 px-6 grid grid-cols-5 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500">
-              <div className="flex gap-5 items-center">
-                <img className="w-8" src={student.userInfo.gender == "Male" ? boySvg : girlSvg} />
-                <h1>{student.userInfo.firstName + " " + student.userInfo.lastName}</h1>
-              </div>
-              <h6 className="">{student.role.slice(0, 1).toUpperCase() + student.role.slice(1, student.role.length)}</h6>
+            <div className="grid grid-cols-12">
+              <div key={student.id} onClick={() => viewProfile(student)} className="col-span-11 bg-customBlue2 rounded-md py-3 px-6 grid grid-cols-5 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500">
+                <div className="flex gap-5 items-center">
+                  <img className="w-8" src={student.userInfo.gender == "Male" ? boySvg : girlSvg} />
+                  <h1>{student.userInfo.firstName + " " + student.userInfo.lastName}</h1>
+                </div>
+                <h6 className="">{student.role.slice(0, 1).toUpperCase() + student.role.slice(1, student.role.length)}</h6>
 
-              <h6 className="">{student.email}</h6>
-              <h6 className="">{student.userInfo.gender}</h6>
-              <button className="w-16 justify-self-end"><img className="w-5" src={gradeSvg} /></button>
+                <h6 className="">{student.email}</h6>
+                <h6 className="">{student.userInfo.gender}</h6>
+              </div>
+              <div className="bg-customBlue2 rounded-md">
+                <img className="w-5" src={gradeSvg}/>
+              </div>
             </div>
           ))}
 
@@ -183,6 +191,10 @@ const RoomDetails = () => {
           </div>
 
         </div>
+      )}
+
+      {gradedStudent && (
+        <div className="fixed p-6 bg-customBlue2"></div>
       )}
     </div>
   );
