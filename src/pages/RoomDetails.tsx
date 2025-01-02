@@ -6,7 +6,7 @@ import { TFetchRoomStudents, TRoomDetails } from "../types/Rooms.types";
 import girlSvg from "../assets/rooms/girl.svg";
 import boySvg from "../assets/rooms/boy.svg";
 import gradeSvg from "../assets/rooms/grade.svg";
-import removeSvg from "../assets/rooms/cross.svg";
+// import removeSvg from "../assets/rooms/cross.svg";
 const RoomDetails = () => {
   const { id } = useParams();
   const { token } = useSelector((state: RootState) => state.authReducer);
@@ -83,9 +83,6 @@ const RoomDetails = () => {
     setGradedStudent(student)
   }
 
-  useEffect(() => console.log(selectedStudent), [selectedStudent]);
-
-  useEffect(() => console.log(room), [room])
 
   if (room == null) {
     return (
@@ -94,8 +91,9 @@ const RoomDetails = () => {
   }
 
   return (
-    <div className="grow flex gap-10 mb-10 mt-20 px-12">
-      <div className="grow relative">
+    <div className={`grow flex gap-10 mb-10 mt-20 px-12 `}>
+      <div className={`${gradedStudent != null ? "blur-sm" : "blur-0"} grow relative flex gap-10`}>
+      <div className="grow">
         <div>
           <div className="text-2xl font-bold ">
             {room
@@ -128,7 +126,7 @@ const RoomDetails = () => {
                 <h6 className="">{student.email}</h6>
                 <h6 className="">{student.userInfo.gender}</h6>
               </div>
-              <div onClick={() => gradeStudent(student)} className="bg-customBlue2 rounded-r-md flex justify-center items-center">
+              <div onClick={() => gradeStudent(student)} className="bg-customBlue2 rounded-r-md flex justify-center items-center cursor-pointer">
                 <img className="w-5" src={gradeSvg} />
               </div>
             </div>
@@ -195,12 +193,22 @@ const RoomDetails = () => {
 
         </div>
       )}
+      </div>
 
       {gradedStudent && (
-        <div className="fixed left-1/2 top-10 bg-customBlue2 p-8 rounded-md backdrop-blur-3xl">
+        <div className="fixed z-10 left-[45%] top-30 bg-customBlue2  p-8 rounded-md backdrop-blur-3xl">
           <div>
-            <h1 className="text-xl font-bold rounded-md">Grade Student</h1>
+            <h1 className="text-xl font-bold rounded-md mb-2">Grade Student</h1>
             <h3>{gradedStudent.userInfo.firstName + " " + gradedStudent.userInfo.lastName}</h3>
+          </div>
+          
+          <div>
+            <input type="number" className="bg-customBlue px-3 py-2 rounded-md" placeholder="0 / 100" />
+
+            <div className="w-full flex justify-end gap-3 text-sm mt-5">
+              <button onClick={() => setGradedStudent(null)} className="w-24 py-2 rounded-md border-2 border-customLightBlue">Close</button>
+              <button className="w-24 py-2 rounded-md bg-customLightBlue border-2 border-customLightBlue">Save</button>
+            </div>
           </div>
         </div>
       )}
