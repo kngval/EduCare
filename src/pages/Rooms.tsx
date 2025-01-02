@@ -133,7 +133,7 @@ function Sections() {
       {role == "admin" && (
 
         <div className="flex justify-end mb-5">
-          <form onSubmit={createRoom} className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2 border-2 border-customLightBlue rounded-md p-6">
+          <form onSubmit={createRoom} className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2  rounded-md p-6">
             <div className="text-sm">
               <div className="">
                 <label>Room Name : </label>
@@ -174,7 +174,7 @@ function Sections() {
       {/*USER FORM IF NOT AN ADMIN (JOIN ROOM ONLY)*/}
       {role != "admin" && (
         <div className="flex justify-end mb-5">
-          <form className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2 rounded-md p-6 border-2 border-customLightBlue" onSubmit={submitJoinRoom}>
+          <form className="w-full sm:w-1/2 text-sm lg:w-[400px] bg-customBlue2 rounded-md p-6 " onSubmit={submitJoinRoom}>
             <label className="text-sm">Join Room : </label>
             <input type="text"
               value={joinRoom}
@@ -255,7 +255,7 @@ function Sections() {
             nonAdminRooms?.map((room) => (
               <div
                 key={room.roomId}
-                className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer border-2 border-customLightBlue"
+                className="bg-customBlue2 mb-4 p-6 rounded-md cursor-pointer "
               >
                 <div className="flex items-center gap-2">
                   <div className="text-xl font-bold">
