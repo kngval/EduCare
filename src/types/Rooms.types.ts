@@ -29,6 +29,7 @@ export type TFetchRoomStudents = {
   email : string,
   grade : number | null,
   role : string,
+  studentId : number,
   userInfo : {
     firstName : string,
     lastName : string,
