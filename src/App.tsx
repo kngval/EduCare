@@ -46,7 +46,7 @@ function App() {
           />
 
           <Route
-            path="/rooms/:id"
+            path="/rooms/:roomId"
             element={token ? <RoomDetails /> : <Navigate to="/login" />}
           />
           <Route
