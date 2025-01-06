@@ -12,7 +12,7 @@ interface CustomJwtPayload extends JwtPayload {
 interface ServerResponse {
   firstName: string;
   lastName: string;
-  age:string;
+  age: string;
   role: string;
   birthdate: string;
   phone: string;
@@ -41,7 +41,7 @@ function Account() {
   const [personalInfo, setPersonalInfo] = useState<ServerResponse>({
     firstName: "",
     lastName: "",
-    age : "",
+    age: "",
     role: "",
     phone: "",
     gender: "",
@@ -71,7 +71,7 @@ function Account() {
         setPersonalInfo({
           firstName: data.firstName,
           lastName: data.lastName,
-          age : data.age,
+          age: data.age,
           role: data.role,
           phone: data.phone ? data.phone : "",
           birthdate: data.birthdate,
@@ -103,7 +103,7 @@ function Account() {
           body: JSON.stringify({
             FirstName: personalInfo.firstName,
             LastName: personalInfo.lastName,
-            Age : parseInt(personalInfo.age),
+            Age: parseInt(personalInfo.age),
             Role: personalInfo.role,
             Birthdate: personalInfo.birthdate,
             Phone: personalInfo.phone,
@@ -260,7 +260,7 @@ function Account() {
                           setResponse(null)
                           setPersonalInfo({
                             ...personalInfo,
-                          age: e.target.value 
+                            age: e.target.value
                           });
                         }}
                         type="number"
@@ -297,28 +297,7 @@ function Account() {
                     )}
                   </div>
 
-                  <div className="grid gap-1 text-xs">
-                    <label className="">Phone :</label>
-                    {personalInfoEdit ? (
-                      <input
-                        value={personalInfo.phone}
-                        onChange={(e) => {
-                          setResponse(null)
-                          setPersonalInfo({
-                            ...personalInfo,
-                            phone: e.target.value,
-                          });
-                        }}
-                        type="tel"
-                        className={inputStyle}
-                        placeholder="123-456-7890"
-                      />
-                    ) : (
-                      <h1 className="font-semibold text-sm">
-                        {personalInfo.phone}
-                      </h1>
-                    )}
-                  </div>
+
                 </div>
 
                 <div className=" md:grow grid text-gray-300 sm:grid-cols-2 md:grid-cols-3 gap-2  text-xs">
@@ -370,6 +349,30 @@ function Account() {
                     )}
                   </div>
                 </div>
+                <div className=" md:grow grid text-gray-300 sm:grid-cols-2 md:grid-cols-3 gap-2  text-xs">
+                  <div className="grid gap-1 text-xs">
+                    <label className="">Phone :</label>
+                    {personalInfoEdit ? (
+                      <input
+                        value={personalInfo.phone}
+                        onChange={(e) => {
+                          setResponse(null)
+                          setPersonalInfo({
+                            ...personalInfo,
+                            phone: e.target.value,
+                          });
+                        }}
+                        type="tel"
+                        className={inputStyle}
+                        placeholder="123-456-7890"
+                      />
+                    ) : (
+                      <h1 className="font-semibold text-sm">
+                        {personalInfo.phone}
+                      </h1>
+                    )}
+                  </div>
+                </div>
                 <div className="flex justify-between items-center mt-5">
                   <div>
                     <ErrorMessage fieldName="personal" response={response} />
@@ -392,6 +395,7 @@ function Account() {
                     </div>
                   )}
                 </div>
+
               </div>
 
               {/*ADDRESS TAB*/}
