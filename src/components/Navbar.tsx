@@ -79,7 +79,7 @@ function Navbar() {
             <div className="">
               <Link to="/admin" className={`${isActive("/admin") ? "bg-customLightBlue" : "bg-none"}  px-3  py-4 flex items-center  rounded-lg`}>
                 <img src={dashboardsvg} className="mx-3 w-5" />
-                <h3 className="font-semibold ">Admin / Teacher</h3>
+                <h3 className="font-semibold ">Admin</h3>
               </Link>
             </div>
             )}
@@ -91,7 +91,7 @@ function Navbar() {
               </Link>
             </div>
 
-            <div className="">
+            <div className={`${role  == "student" ? "block" : "hidden"}`}>
               <Link to="/grades" className={`${isActive("/grades") ? "bg-customLightBlue" : "bg-none"}  px-3  py-4 flex items-center  rounded-lg`}>
                 <img src={gradesvg} className="mx-3 w-5" />
                 <h3 className="font-semibold ">Grades</h3>
