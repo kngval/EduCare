@@ -18,6 +18,7 @@ import gradeSvg from "../assets/rooms/grade.svg";
 import refreshSvg from "../assets/rooms/refresh.svg";
 //utils
 import { getRole } from "../utils/getRole";
+import { findDOMNode } from "react-dom";
 
 const RoomDetails = () => {
   const { token } = useSelector((state: RootState) => state.authReducer);
@@ -159,13 +160,30 @@ const RoomDetails = () => {
     }
   }
 
-  const removeStudent = async() => {
-    try{
-      const res = await fetch(`${import.meta.env.VITE_URL}/api/`)
-    }catch(err) {
+  const removeStudent = async () => {
+    try {
+      console.log("remove stud : ", removePopUp)
+      if (removePopUp == null) {
+        return;
+      }
+      const res = await fetch(`${import.meta.env.VITE_URL}/api/room/remove-student?studentId=${removePopUp.studentId}&roomId=${roomId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json"
+        },
+        method: "DELETE"
+      })
+
+      const data = await res.json();
+      console.log(data);
+    } catch (err) {
       console.error(err);
       return;
+    } finally {
+      setSelectedStudent(null);
+      fetchRoomsStudent();
     }
+
   }
 
 
@@ -251,10 +269,12 @@ const RoomDetails = () => {
                         <h3 className="font-bold">State</h3>
                         <h3 className="text-gray-500">{selectedStudent.userInfo.state}</h3>
                       </div>
-                      <div className="flex justify-end mt-10 text-xs">
-                        <div className="grid grid-cols-2 gap-5 w-52">
+                      <div className={`flex justify-end mt-10 text-xs`}>
+                        <div className={`grid ${role == "student" ? "grid-cols-1 w-28" : "grid-cols-2 w-52"} gap-2 `}>
                           <button onClick={() => setSelectedStudent(null)} className="border-2 border-customLightBlue py-2 rounded-md ">Close</button>
-                          <button onClick={() => setRemovePopUp(selectedStudent)} className="bg-red-500 py-2 rounded-md">Remove</button>
+                          {(role == "admin" || role == "teacher") && (
+                            <button onClick={() => setRemovePopUp(selectedStudent)} className="bg-red-500 py-2 rounded-md">Remove</button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -318,9 +338,12 @@ const RoomDetails = () => {
                 </div>
 
               </div>
-              <div className="grid grid-cols-2 gap-5 mt-20">
+              <div className={`grid ${role == "student" ? "grid-cols-1" : "grid-cols-2"}  gap-5 mt-20`}>
                 <button onClick={() => setSelectedStudent(null)} className="border-2 border-customLightBlue py-3 rounded-md ">Close</button>
-                <button onClick={() => setRemovePopUp(selectedStudent)} className="bg-red-500 py-3 rounded-md">Remove</button>
+                {(role == "admin" || role == "teacher") ? (
+
+                  <button onClick={() => setRemovePopUp(selectedStudent)} className="bg-red-500 py-3 rounded-md">Remove</button>
+                ) : ""}
               </div>
             </div>
 
@@ -328,14 +351,14 @@ const RoomDetails = () => {
         )}
       </div>
 
-      {removePopUp && (
+      {removePopUp && (role == "admin" || role == "teacher") && (
         <div className="fixed z-10 left-[15%] lg:left-[45%]  top-30 bg-customBlue2  p-8 rounded-md backdrop-blur-3xl">
           <div>Are you sure you want to remove <span className="block text-center font-bold">{removePopUp.userInfo.firstName + " " + removePopUp.userInfo.lastName}{" "} <span className="font-normal">?</span></span></div>
 
           <div className="flex justify-end mt-10 text-sm font-semibold">
             <div className="grid grid-cols-2 gap-2">
               <button onClick={() => setRemovePopUp(null)} className="border-2 border-customLightBlue  px-4 rounded-md">Cancel</button>
-              <button onClick={() => removeStudent(removePopUp.studentId)} className="bg-red-500 py-3 px-4 rounded-md">Remove</button>
+              <button onClick={() => removeStudent()} className="bg-red-500 py-3 px-4 rounded-md">Remove</button>
             </div>
           </div>
         </div>
