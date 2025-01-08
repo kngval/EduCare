@@ -28,6 +28,11 @@ export type TFetchRoomStudents = {
   id : number,
   email : string,
   grade : number | null,
+  roomId : number,
+  room : {
+    subjectName : string,
+    teacherName :string,
+  }
   role : string,
   studentId : number,
   userInfo : {
