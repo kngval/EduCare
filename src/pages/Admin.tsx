@@ -75,7 +75,7 @@ function Admin() {
 
   return (
     <div className="grow mb-10 mt-20">
-      <div className="grid px-12">
+      <div className="grid px-6 lg:px-12">
         <div className="font-bold text-2xl">View Authentication Codes</div>
         <div className="text-sm text-gray-500">Admin - Codes</div>
         <div className="flex justify-end mb-10">
