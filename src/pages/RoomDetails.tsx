@@ -18,7 +18,6 @@ import gradeSvg from "../assets/rooms/grade.svg";
 import refreshSvg from "../assets/rooms/refresh.svg";
 //utils
 import { getRole } from "../utils/getRole";
-import { findDOMNode } from "react-dom";
 
 const RoomDetails = () => {
   const { token } = useSelector((state: RootState) => state.authReducer);
@@ -196,7 +195,7 @@ const RoomDetails = () => {
   return (
     <div className={`grow flex gap-10 mb-10 mt-20 px-6 `}>
       <div className={`${gradedStudent != null || removePopUp != null ? "blur-sm" : "blur-0"} grow relative flex gap-10`}>
-        <div className="grow">
+        <div className="grow h-[2000px]">
           <div>
             <div className="text-2xl font-bold ">
 
@@ -288,7 +287,7 @@ const RoomDetails = () => {
 
         </div>
         {selectedStudent && (
-          <div className="sticky p-12 w-96 bg-customBlue2 rounded-md lg:hidden hidden xl:block">
+          <div className="sticky p-12 w-96 h-[850px] top-14 bg-customBlue2 rounded-md  hidden xl:block">
             <div className="flex justify-center">
               <img className="w-36 mb-5" src={selectedStudent.userInfo.gender == "Male" ? boySvg : girlSvg} />
             </div>
