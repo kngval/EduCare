@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { RoomType, TFetchRoomsNonAdmin } from "../types/Rooms.types";
@@ -8,6 +8,7 @@ import { getRole } from "../utils/getRole";
 import addSvg from "../assets/rooms/add.svg";
 import checkSvg from "../assets/rooms/check.svg";
 import crossSvg from "../assets/rooms/cross.svg";
+import refreshSvg from "../assets/rooms/refresh.svg"
 function Sections() {
   const token = useSelector((state: RootState) => state.authReducer.token);
   if (!token) {
@@ -38,7 +39,7 @@ function Sections() {
   }, [token]);
 
   useEffect(() => {
-    console.log("ROOMZZ : ",rooms);
+    console.log("ROOMZZ : ", rooms);
   }, [rooms]);
   const fetchRooms = async () => {
     try {
@@ -201,7 +202,11 @@ function Sections() {
           </form>
         </div>
       )}
-      {/* Room Creation */}
+
+      <div className="flex justify-end">
+
+        <button onClick={fetchRooms} className="flex gap-2 bg-customLightBlue rounded-md px-4 py-2 text-sm mb-5 mt-5"><img src={refreshSvg} className="w-4" />Refresh</button>
+      </div>
 
       {/* Fetch Rooms */}
 
@@ -230,12 +235,15 @@ function Sections() {
                 </div>
 
                 <div>Room Code : {room.roomCode}</div>
-                <div className="flex justify-end">
-                  <div
-                    onClick={() => viewRoomDetails(room.id)}
-                    className="bg-customLightBlue px-4 py-2 text-sm rounded-md cursor-pointer"
-                  >
-                    View
+                <div className="flex items-center text-sm justify-end">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="bg-red-500 rounded-md py-2 px-4 flex items-center justify-center cursor-pointer">Delete</div>
+                    <div
+                      onClick={() => viewRoomDetails(room.id)}
+                      className="bg-customLightBlue flex items-center px-4 justify-center rounded-md cursor-pointer"
+                    >
+                      View
+                    </div>
                   </div>
                 </div>
               </div>
