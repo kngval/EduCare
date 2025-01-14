@@ -50,7 +50,7 @@ function Navbar() {
         </div>
       </nav>
 
-      <div className={`fixed z-50 min-h-screen top-0 -left-full lg:sticky lg:left-0 ${toggle ? "left-0" : "-left-full"} transition-all ease-in-out duration-500 w-[250px] xl:w-[300px]  bg-customBlue2 `}>
+      <div className={`fixed z-50 h-screen top-0 -left-full lg:sticky lg:left-0 ${toggle ? "left-0" : "-left-full"} transition-all ease-in-out duration-500 w-[250px] xl:w-[300px]  bg-customBlue2 `}>
         <div className={`w-full flex justify-end  py-4 pr-5 cursor-pointer lg:cursor-auto`}>
           <svg onClick={() => setToggle(!toggle)} className="w-5 lg:hidden" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#6359E9"></path></g></svg>
         </div>
