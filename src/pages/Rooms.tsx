@@ -15,19 +15,14 @@ function Sections() {
     return null;
   }
   const navigate = useNavigate();
-
   // States
   const [rooms, setRooms] = useState<RoomType[]>();
-
   const [nonAdminRooms, setNonAdminRooms] = useState<TFetchRoomsNonAdmin[]>();
-
   const [roomName, setRoomName] = useState<string>("");
   const [roomResponse, setRoomResponse] = useState<RoomResponse | null>(null);
-
-
   const [joinRoom, setJoinRoom] = useState<string>("");
   const [joinRoomResponse, setJoinRoomResponse] = useState<RoomResponse | null>(null);
-
+  const [togglePopUp,setTogglePopUp] = useState<RoomType | null>(null);
   //DECODE USER TOKEN TO GET USER ROLE;
   const role = getRole(token);
   //Fetch Rooms List
@@ -41,6 +36,7 @@ function Sections() {
   useEffect(() => {
     console.log("ROOMZZ : ", rooms);
   }, [rooms]);
+
   const fetchRooms = async () => {
     try {
       console.log("executing fetch rooms");
@@ -127,8 +123,8 @@ function Sections() {
   }
 
   return (
-    <div className="grow mb-10 mt-20 px-12">
-
+    <div className={`grow  relative mb-10 mt-20 px-12`}>
+      <div className={`${togglePopUp ? "blur-sm" : "blur-none"}`}>
       <div className="text-2xl font-bold ">{role == "admin" ? "Room Creation" : "View Rooms"}</div>
       <div className="text-sm text-gray-500 mb-4">{role == "admin" ? "Room - Create Room" : "Room - View Rooms"}</div>
       {role == "admin" && (
@@ -237,7 +233,7 @@ function Sections() {
                 <div>Room Code : {room.roomCode}</div>
                 <div className="flex items-center text-sm justify-end">
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="bg-red-500 rounded-md py-2 px-4 flex items-center justify-center cursor-pointer">Delete</div>
+                    <div onClick={() => setTogglePopUp(room)} className="bg-red-500 rounded-md py-2 px-4 flex items-center justify-center cursor-pointer">Delete</div>
                     <div
                       onClick={() => viewRoomDetails(room.id)}
                       className="bg-customLightBlue flex items-center px-4 justify-center rounded-md cursor-pointer"
@@ -270,10 +266,15 @@ function Sections() {
                     {room.room.subjectName.slice(0, 1).toUpperCase() +
                       room.room.subjectName.slice(1, room.room.subjectName.length)}
                   </div>
+                  {room.room.teacherName && (
+                    <div>
+
                   <div> - </div>
                   <div className="text-sm text-gray-500">
                     {room.room.teacherName ? room.room.teacherName : "No teacher available"}
                   </div>
+                    </div>
+                  )}
                 </div>
                 <div>Room Code : <span className="">{room.room.roomCode}</span></div>
 
@@ -290,8 +291,18 @@ function Sections() {
           )}
         </div>
       )}
-
-
+</div>
+    {togglePopUp && (
+      <div className="fixed top-10 left-[45%] bg-customBlue2 p-6 w-[350px] rounded-md">
+        <div className="text-center">Are you sure you want to delete <span className="font-bold block text-center">{togglePopUp.subjectName} ?</span></div> 
+        <div className="mt-10 flex justify-end">
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <button onClick={() => setTogglePopUp(null)} className="px-6 border-2 border-customLightBlue rounded-md py-2">Close</button>
+            <button className="px-6 bg-red-500 rounded-md py-2">Delete</button>
+          </div> 
+        </div>
+      </div>
+    )}
     </div>
   );
 }
