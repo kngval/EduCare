@@ -58,8 +58,12 @@ function Grades() {
               <div className="flex justify-between items-center">
                 <div className="text-lg font-bold">
                   {grade.room.subjectName}
-                  {" - "}
-                  <span className="text-gray-500">{grade.room.teacherName}</span>
+                  {grade.room.teacherName && (
+                    <div>
+                      {" - "}
+                      <span className="text-gray-500">{grade.room.teacherName}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="status ">
