@@ -88,13 +88,15 @@ function Sections() {
         success: data.success,
         message: data.message,
       });
-      setRooms((prevRooms) => [data.room,...(prevRooms || [])]);
+      if (data.success === true) {
+        setRooms((prevRooms) => [data.room, ...(prevRooms || [])]);
+      }
       setRoomName("");
       return;
     } catch (error) {
       console.error(error);
       return;
-    } 
+    }
   };
 
   //View room details
@@ -118,7 +120,9 @@ function Sections() {
 
       const data = await res.json();
       setJoinRoomResponse(data);
-      fetchRooms();
+      if (data.success === true) {
+        fetchRooms();
+      }
       console.log(data);
     } catch (err) {
       console.error(err);
@@ -129,11 +133,11 @@ function Sections() {
   const deleteRoom = async (roomId: number) => {
     try {
       const res = await fetch(`${import.meta.env.VITE_URL}/api/room/delete-room?roomId=${roomId}`, {
-        headers : {
-          Authorization : `Bearer ${token}`,
-          "Content-type" : "application/json"
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-type": "application/json"
         },
-        method : "DELETE"
+        method: "DELETE"
       });
 
       const data = await res.json();
@@ -232,7 +236,7 @@ function Sections() {
 
         {/* Fetch Rooms */}
 
-        {(role == "admin" || role == "teacher") && (
+        {(role == "admin" || role == "teacher") && rooms && (
 
           <div className="h-[1500px]">
             {rooms && rooms?.length <= 0 ? (
