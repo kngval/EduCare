@@ -297,7 +297,7 @@ function Sections() {
                         room.room.subjectName.slice(1, room.room.subjectName.length)}
                     </div>
                     {room.room.teacherName && (
-                      <div>
+                      <div className="flex items-center gap-2">
 
                         <div> - </div>
                         <div className="text-sm text-gray-500">
