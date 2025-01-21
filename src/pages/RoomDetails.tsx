@@ -197,12 +197,15 @@ const RoomDetails = () => {
       <div className={`${gradedStudent != null || removePopUp != null ? "blur-sm" : "blur-0"} grow relative flex gap-10`}>
         <div className="grow h-[2000px] lg:px-12">
           <div>
-            <div className="text-2xl font-bold ">
+            <div className="text-2xl font-bold flex gap-2">
 
               {room
                 ? room.subjectName.slice(0, 1).toUpperCase() +
                 room.subjectName.slice(1, room.subjectName.length)
-                : "Unknown"} -
+                : "Unknown"}  
+              {room.teacherName && (
+                <div> - <span className="text-customLightBlue" >{room.teacherName}</span></div>
+              )}
             </div>
             <div className="text-sm text-gray-500 mb-4">View - Room</div>
           </div>
@@ -214,8 +217,8 @@ const RoomDetails = () => {
           </div>
           <div className="grid gap-5">
             {students.length > 0 && students.map((student) => (
-              <div key={student.id} className={`grid ${role == "student" ? "grid-cols-1" : "grid-cols-12"}`}>
-                <div key={student.id} onClick={() => viewProfile(student)} className={`${role == "student" ? "rounded-md" : "rounded-l-md"} col-span-10 lg:col-span-11 bg-customBlue2  py-3 px-6 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500`}>
+              <div key={student.id} className={`grid ${role == "student" ? "grid-cols-1" : "grid-cols-12 gap-2"} `}>
+                <div key={student.id} onClick={() => viewProfile(student)} className={`rounded-md col-span-10 lg:col-span-11 bg-customBlue2  py-3 px-6 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 items-center text-xs hover:bg-customLightBlue ease-in-out duration-500`}>
                   <div className="flex gap-5 items-center">
                     <img className="w-8" src={student.userInfo.gender == "Male" ? boySvg : girlSvg} />
                     <h1>{student.userInfo.firstName + " " + student.userInfo.lastName}</h1>
@@ -225,7 +228,7 @@ const RoomDetails = () => {
                   <h6 className="hidden md:block">{student.email}</h6>
                   <h6 className="hidden 2xl:block">{student.userInfo.gender}</h6>
                 </div>
-                <div onClick={() => gradeStudent(student)} className={`${role == "student" ? "hidden" : "block"} col-span-2 lg:col-span-1 bg-customBlue2 rounded-r-md flex justify-center items-center cursor-pointer`}>
+                <div onClick={() => gradeStudent(student)} className={`${role == "student" ? "hidden" : "block"} col-span-2 lg:col-span-1 bg-customBlue2 rounded-md flex justify-center items-center cursor-pointer hover:bg-customLightBlue ease-in-out duration-500`}>
                   <img className="w-5" src={gradeSvg} />
                 </div>
 
