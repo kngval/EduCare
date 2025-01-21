@@ -56,10 +56,10 @@ function Grades() {
           {grades.map((grade) => (
             <div key={grade.id} className="bg-customBlue2 p-6 rounded-md">
               <div className="flex justify-between items-center">
-                <div className="text-lg font-bold">
+                <div className="text-lg font-bold flex gap-2 items-center">
                   {grade.room.subjectName}
                   {grade.room.teacherName && (
-                    <div>
+                    <div className="flex items-center gap-2">
                       {" - "}
                       <span className="text-gray-500">{grade.room.teacherName}</span>
                     </div>
