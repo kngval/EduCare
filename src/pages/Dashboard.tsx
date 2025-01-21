@@ -3,8 +3,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { TDashboard } from "../types/Dashboard.types";
 import add from "../assets/rooms/add.svg"
+import { getRole } from "../utils/getRole";
 function Dashboard() {
   const token = useSelector((state: RootState) => state.authReducer.token);
+
+  if (!token) return null;
+  const role = getRole(token);
 
   const [toggle, setToggle] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("")
@@ -72,16 +76,18 @@ function Dashboard() {
       <div className="text-2xl font-bold">Dashboard</div>
       <div className="text-gray-500 text-sm">View - Dashboard</div>
 
-      <div className="flex justify-end">
-        <button onClick={() => setToggle(!toggle)} className="bg-customLightBlue text-sm w-[100px] py-2 my-5 rounded-md flex justify-center items-center gap-1 mb-10">
-          <img src={add} className="w-6"/>
-          Create
-        </button>
-      </div>
+      {role === "admin" && (
+        <div className="flex justify-end">
+          <button onClick={() => setToggle(!toggle)} className="bg-customLightBlue text-sm w-[100px] py-2 my-5 rounded-md flex justify-center items-center gap-1 ">
+            <img src={add} className="w-6" />
+            Create
+          </button>
+        </div>
+      )}
 
 
       {toggle === true && (
-        <div className="flex justify-center mb-52">
+        <div className="flex justify-center  mb-52">
           <form onSubmit={submitAnnouncement} className=" w-[600px] bg-customBlue2 p-6 rounded-md text-sm">
             <div className="mb-5">
               <label className="font-bold">Title : </label>
@@ -111,7 +117,7 @@ function Dashboard() {
       )}
 
       {announcements.length > 0 && announcements && (
-        <div className="grid gap-5 justify-items-center">
+        <div className="grid mt-10 gap-5 justify-items-center">
           {
             announcements.map((announcement) => (
               <div className="w-[900px]  text-wrap rounded-md bg-customBlue2">
